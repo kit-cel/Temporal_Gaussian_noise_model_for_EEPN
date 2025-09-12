@@ -140,7 +140,7 @@ Rx_symbols_CPR = Rx_symbols.*exp(-1j*phase_est);
 
 figure();
 title("LO phase and its estimate over time")
-plot(t, Rx_phi(1:2:end)); hold on; plot(t, unwrap(phase_est)); plot(t, movmean(Rx_phi(1:2:end), broadening_symbols));
+plot(t, Rx_phi(1:2:end)); hold on; plot(t, unwrap(phase_est)); plot(t, movmean(Rx_phi(1:2:end), CD_memory));
 legend(["LO phase realization", "Estimated phase", "Mean frequency dependent phase noise"])
 xlabel("Time (s)"); ylabel("Phase (rad)"); fontsize(15,"points")
 %% 
@@ -161,7 +161,7 @@ sigma_simulation(end:end-discard_symbols_analysis) = [];
 % noise model
 
 % Calculate the EEPN distortion power
-sigma_EEPN = movvar(Rx_phi(1:2:end), broadening_symbols);
+sigma_EEPN = movvar(Rx_phi(1:2:end), CD_memory);
 
 % Calculate time-varying distortion power
 sigma_time_varying = system_noise_power + sigma_EEPN;
